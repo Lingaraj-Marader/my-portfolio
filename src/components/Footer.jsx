@@ -1,6 +1,7 @@
 import React from 'react';
 import { Mail, Phone, ArrowUp, Heart, Sparkles } from 'lucide-react';
 import GithubIcon from './icons/GithubIcon';
+import LinkedinIcon from './icons/LinkedinIcon';
 import { personalInfo } from '../data/portfolioData';
 
 export default function Footer() {
@@ -44,6 +45,16 @@ export default function Footer() {
               className="w-10 h-10 rounded-xl bg-dark-900 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:border-cyan-500/40 hover:bg-dark-800 transition-all shadow-sm"
             >
               <GithubIcon className="w-4 h-4" />
+            </a>
+
+            <a
+              href={personalInfo.contact.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="w-10 h-10 rounded-xl bg-dark-900 border border-white/10 flex items-center justify-center text-slate-300 hover:text-blue-400 hover:border-blue-500/40 hover:bg-dark-800 transition-all shadow-sm"
+            >
+              <LinkedinIcon className="w-4 h-4 text-blue-400" />
             </a>
 
             <a

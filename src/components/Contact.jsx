@@ -12,6 +12,7 @@ import {
   ArrowRight
 } from 'lucide-react';
 import GithubIcon from './icons/GithubIcon';
+import LinkedinIcon from './icons/LinkedinIcon';
 import confetti from 'canvas-confetti';
 import { personalInfo } from '../data/portfolioData';
 
@@ -172,6 +173,27 @@ export default function Contact() {
                     </div>
                   </div>
                   <ArrowRight className="w-4 h-4 text-slate-500 group-hover:text-cyan-400 group-hover:translate-x-1 transition-all" />
+                </a>
+
+                {/* LinkedIn */}
+                <a
+                  href={personalInfo.contact.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-4 rounded-xl bg-dark-950/70 border border-white/5 flex items-center justify-between gap-3 group hover:border-blue-500/40 hover:bg-dark-850 transition-all"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400 shrink-0">
+                      <LinkedinIcon className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <span className="text-[11px] font-mono text-slate-400 block uppercase">LinkedIn</span>
+                      <span className="text-sm font-medium text-slate-200 group-hover:text-blue-300 transition-colors">
+                        linkedin.com/in/lingaraj-marader
+                      </span>
+                    </div>
+                  </div>
+                  <ArrowRight className="w-4 h-4 text-slate-500 group-hover:text-blue-400 group-hover:translate-x-1 transition-all" />
                 </a>
 
               </div>

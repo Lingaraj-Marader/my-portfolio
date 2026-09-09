@@ -17,6 +17,7 @@ import {
   ExternalLink
 } from 'lucide-react';
 import GithubIcon from './icons/GithubIcon';
+import LinkedinIcon from './icons/LinkedinIcon';
 import confetti from 'canvas-confetti';
 import { personalInfo } from '../data/portfolioData';
 import profileImg from '../assets/profile.png';
@@ -183,7 +184,19 @@ export default function Hero() {
                 <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition-transform">
                   <GithubIcon className="w-4 h-4" />
                 </div>
-                <span className="truncate">github.com/Lingaraj-Marader</span>
+                <span className="truncate">GitHub: Lingaraj-Marader</span>
+              </a>
+
+              <a
+                href={personalInfo.contact.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2.5 p-3 rounded-xl bg-dark-900/70 border border-white/5 hover:border-blue-500/40 hover:bg-dark-850 hover:shadow-lg hover:shadow-blue-500/10 transition-all text-slate-300 hover:text-blue-300 group"
+              >
+                <div className="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400 group-hover:scale-110 transition-transform">
+                  <LinkedinIcon className="w-4 h-4" />
+                </div>
+                <span className="truncate">LinkedIn: lingaraj-marader</span>
               </a>
             </div>
 

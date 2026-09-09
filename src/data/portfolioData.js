@@ -19,6 +19,7 @@ export const personalInfo = {
     email: "lingarajmarader7@gmail.com",
     phones: ["+91 9535256698", "+91 8618006822"],
     github: "https://github.com/Lingaraj-Marader",
+    linkedin: "https://www.linkedin.com/in/lingaraj-marader/",
     location: "Bengaluru, Karnataka, India",
     resumeUrl: "resume.pdf",
     availableForWork: true,

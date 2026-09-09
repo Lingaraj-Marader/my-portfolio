@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Download, Sparkles, ChevronRight } from 'lucide-react';
 import GithubIcon from './icons/GithubIcon';
+import LinkedinIcon from './icons/LinkedinIcon';
 import confetti from 'canvas-confetti';
 import { personalInfo } from '../data/portfolioData';
 import profileImg from '../assets/profile.png';
@@ -113,7 +114,7 @@ export default function Navbar() {
           </nav>
 
           {/* Right Action Buttons */}
-          <div className="hidden sm:flex items-center gap-3">
+          <div className="hidden sm:flex items-center gap-2.5">
             <a
               href={personalInfo.contact.github}
               target="_blank"
@@ -122,6 +123,16 @@ export default function Navbar() {
               className="p-2.5 rounded-xl text-slate-300 hover:text-white bg-dark-900/80 hover:bg-dark-800 border border-white/10 hover:border-cyan-500/40 transition-all shadow-sm"
             >
               <GithubIcon className="w-5 h-5" />
+            </a>
+
+            <a
+              href={personalInfo.contact.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn Profile"
+              className="p-2.5 rounded-xl text-slate-300 hover:text-white bg-dark-900/80 hover:bg-dark-800 border border-white/10 hover:border-blue-500/40 transition-all shadow-sm"
+            >
+              <LinkedinIcon className="w-5 h-5 text-blue-400" />
             </a>
 
             <a
@@ -187,19 +198,32 @@ export default function Navbar() {
                 );
               })}
 
-              <div className="pt-4 mt-2 border-t border-white/10 flex items-center justify-between">
-                <a
-                  href={personalInfo.contact.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-slate-300 hover:text-white text-sm"
-                >
-                  <GithubIcon className="w-5 h-5" />
-                  <span>GitHub Profile</span>
-                </a>
+              <div className="pt-4 mt-2 border-t border-white/10 flex flex-col gap-2.5">
+                <div className="flex items-center gap-4">
+                  <a
+                    href={personalInfo.contact.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-slate-300 hover:text-white text-sm"
+                  >
+                    <GithubIcon className="w-4 h-4" />
+                    <span>GitHub</span>
+                  </a>
+
+                  <a
+                    href={personalInfo.contact.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-slate-300 hover:text-blue-400 text-sm"
+                  >
+                    <LinkedinIcon className="w-4 h-4 text-blue-400" />
+                    <span>LinkedIn</span>
+                  </a>
+                </div>
+
                 <span className="text-xs text-slate-400 flex items-center gap-1">
                   <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-                  Available for roles
+                  Available for AI/ML & Engineering Roles
                 </span>
               </div>
             </div>
