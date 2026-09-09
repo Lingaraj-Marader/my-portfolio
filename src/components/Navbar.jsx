@@ -4,6 +4,7 @@ import { Menu, X, Download, Sparkles, ChevronRight } from 'lucide-react';
 import GithubIcon from './icons/GithubIcon';
 import confetti from 'canvas-confetti';
 import { personalInfo } from '../data/portfolioData';
+import profileImg from '../assets/profile.png';
 
 const navItems = [
   { name: 'Home', href: '#home' },
@@ -63,15 +64,20 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Logo */}
+          {/* Logo with Lingaraj's Avatar */}
           <a
             href="#home"
-            className="group flex items-center gap-2 text-xl sm:text-2xl font-black font-heading tracking-tight"
+            className="group flex items-center gap-3 text-lg sm:text-xl font-black font-heading tracking-tight"
           >
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 via-blue-600 to-violet-600 flex items-center justify-center text-white font-bold shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform">
-              L
+            <div className="relative w-10 h-10 rounded-full p-[1.5px] bg-gradient-to-tr from-cyan-400 via-blue-500 to-violet-500 shadow-md shadow-cyan-500/20 group-hover:scale-105 transition-transform">
+              <img
+                src={profileImg}
+                alt="Lingaraj Marader"
+                className="w-full h-full object-cover rounded-full"
+              />
+              <span className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-500 border-2 border-dark-950" />
             </div>
-            <span className="text-white group-hover:text-cyan-400 transition-colors">
+            <span className="text-white group-hover:text-cyan-300 transition-colors">
               Lingaraj{' '}
               <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
                 Marader

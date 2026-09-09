@@ -12,48 +12,86 @@ export default function BackgroundCanvas() {
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
 
+    let mouse = {
+      x: width / 2,
+      y: height / 2,
+      radius: 180,
+      isActive: false
+    };
+
+    const handleMouseMove = (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+      mouse.isActive = true;
+    };
+
+    const handleMouseLeave = () => {
+      mouse.isActive = false;
+    };
+
     const handleResize = () => {
       if (!canvas) return;
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
     };
 
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseleave', handleMouseLeave);
     window.addEventListener('resize', handleResize);
 
-    // Particle settings
-    const particleCount = Math.min(Math.floor((width * height) / 18000), 70);
+    const particleCount = Math.min(Math.floor((width * height) / 14000), 85);
     const particles = [];
 
     class Particle {
       constructor() {
         this.x = Math.random() * width;
         this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 0.45;
-        this.vy = (Math.random() - 0.5) * 0.45;
-        this.radius = Math.random() * 1.8 + 0.8;
+        this.baseX = this.x;
+        this.baseY = this.y;
+        this.vx = (Math.random() - 0.5) * 0.55;
+        this.vy = (Math.random() - 0.5) * 0.55;
+        this.radius = Math.random() * 2 + 0.8;
         this.color =
-          Math.random() > 0.5
+          Math.random() > 0.4
             ? 'rgba(6, 182, 212, ' // Cyan
-            : 'rgba(139, 92, 246, '; // Violet
-        this.alpha = Math.random() * 0.4 + 0.2;
+            : Math.random() > 0.5
+            ? 'rgba(139, 92, 246, ' // Violet
+            : 'rgba(59, 130, 246, '; // Blue
+        this.alpha = Math.random() * 0.45 + 0.25;
       }
 
       update() {
         this.x += this.vx;
         this.y += this.vy;
 
+        // Wrap edges
         if (this.x < 0) this.x = width;
         else if (this.x > width) this.x = 0;
         if (this.y < 0) this.y = height;
         else if (this.y > height) this.y = 0;
+
+        // Interactive mouse repulsion / subtle magnetic wave
+        if (mouse.isActive) {
+          const dx = mouse.x - this.x;
+          const dy = mouse.y - this.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < mouse.radius) {
+            const force = (mouse.radius - distance) / mouse.radius;
+            const directionX = (dx / distance) * force * 1.6;
+            const directionY = (dy / distance) * force * 1.6;
+            this.x -= directionX;
+            this.y -= directionY;
+          }
+        }
       }
 
       draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
         ctx.fillStyle = this.color + this.alpha + ')';
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = this.color + '0.8)';
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = this.color + '0.7)';
         ctx.fill();
         ctx.shadowBlur = 0;
       }
@@ -64,7 +102,7 @@ export default function BackgroundCanvas() {
     }
 
     const connect = () => {
-      const maxDist = 130;
+      const maxDist = 135;
       for (let a = 0; a < particles.length; a++) {
         for (let b = a + 1; b < particles.length; b++) {
           const dx = particles[a].x - particles[b].x;
@@ -72,12 +110,28 @@ export default function BackgroundCanvas() {
           const dist = Math.sqrt(dx * dx + dy * dy);
 
           if (dist < maxDist) {
-            const opacity = (1 - dist / maxDist) * 0.15;
+            const opacity = (1 - dist / maxDist) * 0.18;
             ctx.strokeStyle = `rgba(59, 130, 246, ${opacity})`;
-            ctx.lineWidth = 0.8;
+            ctx.lineWidth = 0.75;
             ctx.beginPath();
             ctx.moveTo(particles[a].x, particles[a].y);
             ctx.lineTo(particles[b].x, particles[b].y);
+            ctx.stroke();
+          }
+        }
+
+        // Connect to mouse if close
+        if (mouse.isActive) {
+          const dx = mouse.x - particles[a].x;
+          const dy = mouse.y - particles[a].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 110) {
+            const opacity = (1 - dist / 110) * 0.28;
+            ctx.strokeStyle = `rgba(6, 182, 212, ${opacity})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(particles[a].x, particles[a].y);
+            ctx.lineTo(mouse.x, mouse.y);
             ctx.stroke();
           }
         }
@@ -97,6 +151,8 @@ export default function BackgroundCanvas() {
     render();
 
     return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseleave', handleMouseLeave);
       window.removeEventListener('resize', handleResize);
       cancelAnimationFrame(animationFrameId);
     };
@@ -105,7 +161,7 @@ export default function BackgroundCanvas() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0 opacity-45"
+      className="fixed inset-0 pointer-events-none z-0 opacity-55"
       aria-hidden="true"
     />
   );

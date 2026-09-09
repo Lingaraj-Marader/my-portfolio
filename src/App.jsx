@@ -9,15 +9,23 @@ import EducationCertifications from './components/EducationCertifications';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import BackgroundCanvas from './components/BackgroundCanvas';
+import CustomCursor from './components/CustomCursor';
+import ScrollProgress from './components/ScrollProgress';
 
 export default function App() {
   return (
     <div className="min-h-screen bg-dark-950 text-slate-100 selection:bg-cyan-500/30 selection:text-cyan-200 relative overflow-x-hidden">
-      {/* Dynamic 60fps Starfield / Particle Background */}
+      {/* Scroll Progress Bar at the top */}
+      <ScrollProgress />
+
+      {/* Smooth spring glowing custom cursor */}
+      <CustomCursor />
+
+      {/* Dynamic 60fps Interactive Particle & Magnetic Starfield Background */}
       <BackgroundCanvas />
 
-      {/* Grid Pattern Overlay */}
-      <div className="fixed inset-0 bg-grid-pattern pointer-events-none opacity-30 z-0" />
+      {/* Ambient Grid Pattern Overlay */}
+      <div className="fixed inset-0 bg-grid-pattern pointer-events-none opacity-25 z-0" />
 
       {/* Content Layer */}
       <div className="relative z-10">
