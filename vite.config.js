@@ -4,6 +4,6 @@ import { defineConfig } from 'vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: './', // Ensures relative asset paths for GitHub Pages hosting
+  base: '/my-portfolio/', // Matches your GitHub repository name https://github.com/Lingaraj-Marader/my-portfolio
 })
 
